@@ -1,0 +1,25 @@
+import Link from "next/link";
+
+const getJsonApiDummy = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await res.json();
+  return data;
+};
+
+export default async function RSCPage() {
+  const data = await getJsonApiDummy();
+
+  return (
+    <div className="p-20 flex flex-col gap-y-10 items-center justify-center">
+      <h1 className="text-3xl font-bold">Link3</h1>
+      <div>
+        {data.map((post: any) => (
+          <div key={post.id}>{post.title}</div>
+        ))}
+      </div>
+      <div className="flex items-center gap-x-4">
+        <Link href="/" className="hover:underline">Back</Link>
+      </div>
+    </div>
+  );
+};
